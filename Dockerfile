@@ -11,4 +11,4 @@ ADD . /usr/src/app
 
 ENTRYPOINT ["python", "manage.py"]
 
-CMD ["runserver", "-h 0.0.0.0"]
+CMD ["runserver", "-h", "0.0.0.0"]
