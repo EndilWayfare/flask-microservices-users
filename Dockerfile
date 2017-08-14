@@ -9,4 +9,6 @@ RUN pip install -r requirements.txt
 
 ADD . /usr/src/app
 
+ENTRYPOINT ["python", "manage.py"]
+
 CMD python manage.py runserver -h 0.0.0.0
