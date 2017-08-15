@@ -1,6 +1,7 @@
+import subprocess
 import unittest
-import coverage
 
+import coverage
 from flask_script import Manager
 
 from project import create_app, db
@@ -58,6 +59,12 @@ def cov():
         COV.erase()
         return 0
     return 1
+
+
+@manager.command
+def gunicorn(bind='0.0.0.0'):
+    print(f'Starting gunicorn (binding to{bind})')
+    subprocess.call(['gunicorn', '-b', bind, 'manage:app'])
 
 
 if __name__ == '__main__':
