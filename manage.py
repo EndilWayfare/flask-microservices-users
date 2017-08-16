@@ -2,6 +2,7 @@ import subprocess
 import unittest
 
 import coverage
+from flask_migrate import MigrateCommand
 from flask_script import Manager
 
 from project import create_app, db
@@ -20,6 +21,9 @@ app = create_app()
 manager = Manager(app)
 
 
+manager.add_command('db', MigrateCommand)
+
+
 @manager.command
 def recreate_db():
     """Recreates a database"""
@@ -31,8 +35,16 @@ def recreate_db():
 @manager.command
 def seed_db():
     """Seeds the database with sample data."""
-    db.session.add(User(username='michael', email='michael@realpython.com'))
-    db.session.add(User(username='michaelherman', email='michael@mherman.org'))
+    db.session.add(User(
+        username='michael',
+        email='michael@realpython.com',
+        password='test'
+    ))
+    db.session.add(User(
+        username='michaelherman',
+        email='michael@mherman.org',
+        password='test'
+    ))
     db.session.commit()
 
 
